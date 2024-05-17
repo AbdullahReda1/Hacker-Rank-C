@@ -18,52 +18,51 @@ int main()
     char* n_str = readline();
     int n = strtol(n_str, &n_endptr, 10);
 
-    if (n_endptr == n_str || *n_endptr != '\0') 
-	{ 
-		exit(EXIT_FAILURE); 
-	}
+    if (n_endptr == n_str || *n_endptr != '\0') { exit(EXIT_FAILURE); }
 
     // Write Your Code Here
+    
+    if(n >= 0 && n <=9){
+             if (n == 1) { printf("one");   }
+        else if (n == 2) { printf("two");   }
+        else if (n == 3) { printf("three"); }
+        else if (n == 4) { printf("four");  }
+        else if (n == 5) { printf("five");  }
+        else if (n == 6) { printf("six");   }
+        else if (n == 7) { printf("seven"); }
+        else if (n == 8) { printf("eight"); }
+        else             { printf("nine");  }
+    }else {
+        printf("Greater than 9");
+    }
 
     return 0;
 }
 
-char* readline() 
-{
-	size_t alloc_length = 1024;
-	size_t data_length = 0;
-	char* data = malloc(alloc_length);
+char* readline() {
+    size_t alloc_length = 1024;
+    size_t data_length = 0;
+    char* data = malloc(alloc_length);
 
-    while (true) 
-	{
+    while (true) {
         char* cursor = data + data_length;
         char* line = fgets(cursor, alloc_length - data_length, stdin);
 
-        if (!line)
-		{ 
-			break; 
-		}
+        if (!line) { break; }
 
         data_length += strlen(cursor);
 
-        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') 
-		{ 
-			break; 
-		}
+        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') { break; }
 
         size_t new_length = alloc_length << 1;
         data = realloc(data, new_length);
 
-        if (!data)
-		{ 
-			break; 
-		}
+        if (!data) { break; }
 
         alloc_length = new_length;
     }
 
-    if (data[data_length - 1] == '\n') 
-	{
+    if (data[data_length - 1] == '\n') {
         data[data_length - 1] = '\0';
     }
 
