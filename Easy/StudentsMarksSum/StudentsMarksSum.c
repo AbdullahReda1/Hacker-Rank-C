@@ -5,8 +5,8 @@
 
 //Complete the following function.
 int marks_summation(int* marks, int number_of_students, char gender) {
-  //Write your code here.
-  
+    //Write your code here.
+	
 }
 
 int main() {
