@@ -11,6 +11,12 @@ int main()
     }
 
     /* Write the logic to reverse the array. */
+    int temp;
+    for (int i = 0; i < (num / 2); i++) {
+        temp = arr[num - i - 1];
+        arr[num - i - 1] = arr[i];
+        arr[i]= temp;
+    }
     
 
     for(i = 0; i < num; i++)
