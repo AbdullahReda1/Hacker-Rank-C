@@ -12,7 +12,7 @@ int main() {
     int arrCounter[10] = {0};
     
     int i = 0;
-    while (s[i] != NULL) {
+    while (s[i] != '\0') {
         if ((s[i] >= '0') && (s[i] <= '9')) {
             arrCounter[(s[i] - 48)]++;
         }
