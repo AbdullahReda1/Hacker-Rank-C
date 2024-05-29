@@ -11,7 +11,14 @@ int main() {
     s = realloc(s, strlen(s) + 1);
 
     //Write your logic to print the tokens of the sentence here.
-    
+    int i = 0;
+    while (s[i] != NULL) {
+        printf("%c", s[i]);
+        if(s[i] == ' ') {
+            printf("\n");
+        }
+        i++;
+    }
 
     return 0;
 }
