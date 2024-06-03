@@ -20,6 +20,15 @@ int main()
     int total_number_of_queries;
     scanf("%d", &total_number_of_queries);
     
+    // Allocate memory for the total number of books per shelf
+    total_number_of_books = calloc(total_number_of_shelves, sizeof(int));
+    
+    // Allocate memory for the total number of pages per book per shelf
+    total_number_of_pages = calloc(total_number_of_shelves, sizeof(int*));
+    for (int i = 0; i < total_number_of_shelves; i++) {
+        total_number_of_pages[i] = NULL;
+    }
+    
     while (total_number_of_queries--) {
         int type_of_query;
         scanf("%d", &type_of_query);
@@ -30,6 +39,16 @@ int main()
              */
             int x, y;
             scanf("%d %d", &x, &y);
+            
+            // Increase the count of books on shelf x
+            total_number_of_books[x] ++;
+            int size = total_number_of_books[x];
+            
+            // Reallocate memory to accommodate the new book
+            total_number_of_pages[x] = realloc(total_number_of_pages[x], size * sizeof(int));
+            
+            // Store the number of pages in the new book
+            total_number_of_pages[x][size - 1] = y;
 
         } else if (type_of_query == 2) {
             int x, y;
