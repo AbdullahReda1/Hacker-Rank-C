@@ -18,6 +18,7 @@ int next_permutation(int n, char **s)
             // If such a pair is found, traverse the array from right to left again
             // to find the first element that is greater than the current element.
             for (int j = n - 1; j > i; j--) {
+				// Find the smallest element to the right of `i` that is larger than `s[i]`
                 if (strcmp(s[j], s[i]) > 0) {
                     // Swap these two elements.
                     char *temp = s[i];
