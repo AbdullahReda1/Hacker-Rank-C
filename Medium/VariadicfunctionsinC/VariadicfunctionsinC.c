@@ -7,15 +7,55 @@
 #define MAX_ELEMENT 1000000
 
 int  sum (int count,...) {
-
+    va_list pargs;
+    int _sum = 0;
+    
+    va_start(pargs, count);
+    
+    for (int i = 0; i < count; i++) {
+        int var = va_arg(pargs, int);
+        _sum += var;
+    }
+    
+    va_end(pargs);
+    
+    return _sum;
 }
 
 int min(int count,...) {
-
+    va_list pargs;
+    int _min = MAX_ELEMENT;
+    
+    va_start(pargs, count);
+    
+    for (int i = 0; i < count; i++) {
+        int var = va_arg(pargs, int);
+        if (_min > var) {
+            _min = var;
+        }
+    }
+    
+    va_end(pargs);
+    
+    return _min;
 }
 
 int max(int count,...) {
-
+    va_list pargs;
+    int _max = MIN_ELEMENT;
+    
+    va_start(pargs, count);
+    
+    for (int i = 0; i < count; i++) {
+        int var = va_arg(pargs, int);
+        if (_max < var) {
+            _max = var;
+        }
+    }
+    
+    va_end(pargs);
+    
+    return _max;
 }
 
 int test_implementations_by_sending_three_elements() {
