@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include<assert.h>
+
 #define MAX_CHARACTERS 1005
 #define MAX_PARAGRAPHS 5
 
@@ -15,6 +16,10 @@ char** kth_sentence_in_mth_paragraph(char**** document, int k, int m) {
 
 char*** kth_paragraph(char**** document, int k) {
     return document[k - 1];
+}
+
+int is_whitespace(char ch) {
+    return ch == ' ';
 }
 
 char**** get_document(char* text) {
