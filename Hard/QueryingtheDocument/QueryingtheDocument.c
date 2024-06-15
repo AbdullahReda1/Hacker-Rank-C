@@ -6,20 +6,29 @@
 #define MAX_CHARACTERS 1005
 #define MAX_PARAGRAPHS 5
 
+// Return the k-th word in the m-th sentence of the n-th paragraph
 char* kth_word_in_mth_sentence_of_nth_paragraph(char**** document, int k, int m, int n) {
     return document[n - 1][m - 1][k - 1];
 }
 
+// Return the k-th sentence in the m-th paragraph
 char** kth_sentence_in_mth_paragraph(char**** document, int k, int m) { 
     return document[m - 1][k - 1];
 }
 
+// Return the k-th paragraph
 char*** kth_paragraph(char**** document, int k) {
     return document[k - 1];
 }
 
+// Function to check if a character is whitespace
 int is_whitespace(char ch) {
-    return ch == ' ';
+    return (ch == ' ');
+}
+
+// Function to check if a character is a valid text character
+int is_text(char ch) {
+    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
 
 char**** get_document(char* text) {
