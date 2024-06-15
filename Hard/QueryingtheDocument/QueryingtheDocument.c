@@ -31,6 +31,7 @@ int is_text(char ch) {
     return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
 
+// Function to parse the entire document from the text
 char**** get_document(char* text) {
     
 }
