@@ -31,6 +31,16 @@ int is_text(char ch) {
     return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
 
+// Function to check if a character is a sentence terminator (period)
+int is_sentence_terminator(char ch) {
+    return (ch == '.');
+}
+
+// Function to check if a character is a paragraph terminator (newline or null terminator)
+int is_paragraph_terminator(char ch) {
+    return ((ch == '\n') || (ch == '\0'));
+}
+
 // Function to parse the entire document from the text
 char**** get_document(char* text) {
     
