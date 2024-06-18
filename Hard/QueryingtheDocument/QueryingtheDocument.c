@@ -21,9 +21,23 @@ char*** kth_paragraph(char**** document, int k) {
     return document[k - 1];
 }
 
+// Helper function to insert a character into a word, resizing the word as needed
+void insert_char(char** word, int* word_len, char ch) {
+    (*word_len)++;
+    *word = realloc(*word, (*word_len) * sizeof(char));
+    *word[*word_len - 1] = ch;
+}
+
 // Function to check if a character is whitespace
 int is_whitespace(char ch) {
     return (ch == ' ');
+}
+
+// Function to trim leading whitespace characters
+void trim_whitespace(char* text, int* character) {
+    while (is_whitespace(text[*character])) {
+        (*character)++;
+    }
 }
 
 // Function to check if a character is a valid text character
