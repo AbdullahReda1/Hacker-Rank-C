@@ -57,7 +57,7 @@ int is_paragraph_terminator(char ch) {
 
 // Function to get the next character in the text and increment the index
 char next_character(char* text, int* character) {
-
+    return (text[(*character)++]);
 }
 
 // Function to parse the next word from the text
