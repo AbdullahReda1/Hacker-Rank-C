@@ -55,6 +55,26 @@ int is_paragraph_terminator(char ch) {
     return ((ch == '\n') || (ch == '\0'));
 }
 
+// Function to get the next character in the text and increment the index
+char next_character(char* text, int* character) {
+
+}
+
+// Function to parse the next word from the text
+char* next_word(char* text, int* character) {
+    
+}
+
+// Function to parse the next sentence from the text
+char** next_sentence(char* text, int* character) {
+    
+}
+
+// Function to parse the next paragraph from the text
+char*** next_paragraph(char* text, int* character) {
+    
+}
+
 // Function to parse the entire document from the text
 char**** get_document(char* text) {
     
