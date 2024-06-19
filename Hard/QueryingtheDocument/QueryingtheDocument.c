@@ -3,8 +3,9 @@
 #include <string.h>
 #include<assert.h>
 
-#define MAX_CHARACTERS 1005
-#define MAX_PARAGRAPHS 5
+#define MAX_CHARACTERS      1005
+#define MAX_PARAGRAPHS      5
+#define DEFAULT_LEN         8
 
 // Return the k-th word in the m-th sentence of the n-th paragraph
 char* kth_word_in_mth_sentence_of_nth_paragraph(char**** document, int k, int m, int n) {
