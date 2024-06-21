@@ -63,6 +63,12 @@ char next_character(char* text, int* character) {
 
 // Function to parse the next word from the text
 char* next_word(char* text, int* character) {
+    char* word = malloc(DEFAULT_LEN * sizeof(char));    // Allocate initial memory for the word
+    int word_size = 0;                                  // Initialize word size
+
+    while (is_text(text[*character])) {
+        
+    }
     
 }
 
