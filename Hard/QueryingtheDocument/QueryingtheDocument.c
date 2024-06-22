@@ -66,15 +66,32 @@ char* next_word(char* text, int* character) {
     char* word = malloc(DEFAULT_LEN * sizeof(char));    // Allocate initial memory for the word
     int word_size = 0;                                  // Initialize word size
 
+    // Loop through characters until a non-text character is encountered
     while (is_text(text[*character])) {
-        
+        char ch = next_character(text, character);      // Get the next character
+        insert_char(&word, &word_size, ch);             // Insert the character into the word
     }
     
+    insert_char(&word, &word_size, '\0');               // Null-terminate the word
+    return word;
 }
 
 // Function to parse the next sentence from the text
 char** next_sentence(char* text, int* character) {
+    char** sentence = malloc(DEFAULT_LEN * sizeof(char*));                  // Allocate initial memory for the sentence
+    int sentence_len = 0;                                                   // Initialize sentence length
     
+    // Loop through characters until a sentence terminator is encountered
+    while (!is_sentence_terminator(text[*character])) {
+        trim_whitespace(text, character);                                   // Trim leading whitespace
+        char* word = next_word(text, character);                            // Parse the next word
+    
+        sentence = realloc(sentence, (sentence_len + 1) * sizeof(char*));   // Resize the sentence array
+        sentence[sentence_len++] = word;                                    // Add the word to the sentence
+    }
+    
+    next_character(text, character);                                        // Move past the period
+    return sentence;
 }
 
 // Function to parse the next paragraph from the text
