@@ -96,13 +96,15 @@ char** next_sentence(char* text, int* character) {
 
 // Function to parse the next paragraph from the text
 char*** next_paragraph(char* text, int* character) {
-    char*** paragraph = malloc(DEFAULT_LEN * sizeof(char**));
-    int paragraph_len = 0;
-
-    while (is_paragraph_terminator(text[*character])) {
-        char** sentence = next_sentence(text, character);
-        paragraph = realloc(paragraph, (paragraph_len + 1) * sizeof(char**));
-        paragraph[paragraph_len++] = sentence;
+    char*** paragraph = malloc(DEFAULT_LEN * sizeof(char**));                       // Allocate initial memory for the paragraph
+    int paragraph_len = 0;                                                          // Initialize paragraph length
+    
+    // Loop through characters until a paragraph terminator is encountered
+    while (!is_paragraph_terminator(text[*character])) {
+        char** sentence = next_sentence(text, character);                           // Parse the next sentence
+    
+        paragraph = realloc(paragraph, (paragraph_len + 1) * sizeof(char**));       // Resize the paragraph array
+        paragraph[paragraph_len++] = sentence;                                      // Add the sentence to the paragraph
     }
     
     return paragraph;
