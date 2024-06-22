@@ -25,8 +25,8 @@ char*** kth_paragraph(char**** document, int k) {
 // Helper function to insert a character into a word, resizing the word as needed
 void insert_char(char** word, int* word_len, char ch) {
     (*word_len)++;
-    *word = realloc(*word, (*word_len) * sizeof(char));
-    *word[*word_len - 1] = ch;
+    (*word) = realloc(*word, sizeof(char) * (*word_len));
+    (*word)[*word_len - 1] = ch;
 }
 
 // Function to check if a character is whitespace
@@ -85,9 +85,10 @@ char** next_sentence(char* text, int* character) {
     while (!is_sentence_terminator(text[*character])) {
         trim_whitespace(text, character);                                   // Trim leading whitespace
         char* word = next_word(text, character);                            // Parse the next word
-    
-        sentence = realloc(sentence, (sentence_len + 1) * sizeof(char*));   // Resize the sentence array
-        sentence[sentence_len++] = word;                                    // Add the word to the sentence
+
+        sentence_len++;
+        sentence = realloc(sentence, sentence_len * sizeof(char*));   // Resize the sentence array
+        sentence[sentence_len - 1] = word;                                    // Add the word to the sentence
     }
     
     next_character(text, character);                                        // Move past the period
@@ -102,9 +103,10 @@ char*** next_paragraph(char* text, int* character) {
     // Loop through characters until a paragraph terminator is encountered
     while (!is_paragraph_terminator(text[*character])) {
         char** sentence = next_sentence(text, character);                           // Parse the next sentence
-    
-        paragraph = realloc(paragraph, (paragraph_len + 1) * sizeof(char**));       // Resize the paragraph array
-        paragraph[paragraph_len++] = sentence;                                      // Add the sentence to the paragraph
+
+        paragraph_len++;
+        paragraph = realloc(paragraph, paragraph_len * sizeof(char**));       // Resize the paragraph array
+        paragraph[paragraph_len - 1] = sentence;                                      // Add the sentence to the paragraph
     }
     
     return paragraph;
@@ -121,9 +123,10 @@ char**** get_document(char* text) {
     while (!last_paragraph) {
         char*** paragraph = next_paragraph(text, &character);           // Parse the next paragraph
         last_paragraph = next_character(text, &character) == '\0';      // Check if the last character is reached
-    
-        document = realloc(document, (doc_len + 1) * sizeof(char***));  // Resize the document array
-        document[doc_len++] = paragraph;                                // Add the paragraph to the document
+
+        doc_len++;
+        document = realloc(document, doc_len * sizeof(char***));  // Resize the document array
+        document[doc_len - 1] = paragraph;                                // Add the paragraph to the document
     }
     
     return document;
