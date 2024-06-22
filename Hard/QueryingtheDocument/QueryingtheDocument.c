@@ -112,7 +112,19 @@ char*** next_paragraph(char* text, int* character) {
 
 // Function to parse the entire document from the text
 char**** get_document(char* text) {
-    
+    char**** document = malloc(DEFAULT_LEN * sizeof(char***));
+    int character = 0;
+    int document_len = 0;
+    int last_paragraph = 0;
+
+    while (!last_paragraph) {
+        char*** paragraph = next_paragraph(text, &character);
+        last_paragraph = next_character(text, &character) == '\0';
+        document = realloc(realloc, (document_len + 1) * sizeof(char***));
+        document[document_len++] = paragraph;
+    }
+
+    return document;
 }
 
 char* get_input_text() {	
