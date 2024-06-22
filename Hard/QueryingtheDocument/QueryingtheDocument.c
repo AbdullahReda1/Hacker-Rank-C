@@ -96,7 +96,16 @@ char** next_sentence(char* text, int* character) {
 
 // Function to parse the next paragraph from the text
 char*** next_paragraph(char* text, int* character) {
+    char*** paragraph = malloc(DEFAULT_LEN * sizeof(char**));
+    int paragraph_len = 0;
+
+    while (is_paragraph_terminator(text[*character])) {
+        char** sentence = next_sentence(text, character);
+        paragraph = realloc(paragraph, (paragraph_len + 1) * sizeof(char**));
+        paragraph[paragraph_len++] = sentence;
+    }
     
+    return paragraph;
 }
 
 // Function to parse the entire document from the text
