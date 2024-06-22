@@ -112,18 +112,20 @@ char*** next_paragraph(char* text, int* character) {
 
 // Function to parse the entire document from the text
 char**** get_document(char* text) {
-    char**** document = malloc(DEFAULT_LEN * sizeof(char***));
-    int character = 0;
-    int document_len = 0;
-    int last_paragraph = 0;
-
+    char**** document = malloc(DEFAULT_LEN * sizeof(char***));          // Allocate initial memory for the document
+    int character = 0;                                                  // Initialize character index
+    int doc_len = 0;                                                    // Initialize document length
+    int last_paragraph = 0;                                             // Flag to check if the last paragraph has been reached
+    
+    // Loop until the last paragraph is reached
     while (!last_paragraph) {
-        char*** paragraph = next_paragraph(text, &character);
-        last_paragraph = next_character(text, &character) == '\0';
-        document = realloc(realloc, (document_len + 1) * sizeof(char***));
-        document[document_len++] = paragraph;
+        char*** paragraph = next_paragraph(text, &character);           // Parse the next paragraph
+        last_paragraph = next_character(text, &character) == '\0';      // Check if the last character is reached
+    
+        document = realloc(document, (doc_len + 1) * sizeof(char***));  // Resize the document array
+        document[doc_len++] = paragraph;                                // Add the paragraph to the document
     }
-
+    
     return document;
 }
 
