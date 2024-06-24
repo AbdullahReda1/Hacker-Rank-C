@@ -24,6 +24,7 @@ char*** kth_paragraph(char**** document, int k) {
 
 // Helper function to insert a character into a word, resizing the word as needed
 void insert_char(char** word, int* word_len, char ch) {
+    /* These lines are important, also the '()' more important */
     (*word_len)++;
     (*word) = realloc(*word, sizeof(char) * (*word_len));
     (*word)[*word_len - 1] = ch;
