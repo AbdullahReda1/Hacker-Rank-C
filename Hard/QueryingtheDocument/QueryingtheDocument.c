@@ -7,22 +7,37 @@
 #define MAX_PARAGRAPHS      5
 #define DEFAULT_LEN         8
 
-// Return the k-th word in the m-th sentence of the n-th paragraph
+/// @brief Return the k-th word in the m-th sentence of the n-th paragraph
+/// @param document the document
+/// @param k the words
+/// @param m the sentences
+/// @param n the paragraphs
+/// @return pointer to char
 char* kth_word_in_mth_sentence_of_nth_paragraph(char**** document, int k, int m, int n) {
     return document[n - 1][m - 1][k - 1];
 }
 
-// Return the k-th sentence in the m-th paragraph
+/// @brief Return the k-th sentence in the m-th paragraph
+/// @param document the document
+/// @param k the sentences
+/// @param m the paragraphs
+/// @return pointer to pointer to char
 char** kth_sentence_in_mth_paragraph(char**** document, int k, int m) { 
     return document[m - 1][k - 1];
 }
 
-// Return the k-th paragraph
+/// @brief Return the k-th paragraph
+/// @param document the document
+/// @param k the paragraphs
+/// @return pointer to pointer to pointer to char
 char*** kth_paragraph(char**** document, int k) {
     return document[k - 1];
 }
 
-// Helper function to insert a character into a word, resizing the word as needed
+/// @brief Helper function to insert a character into a word, resizing the word as needed
+/// @param word pointer to pointer to char
+/// @param word_len pointer to int
+/// @param ch the character
 void insert_char(char** word, int* word_len, char ch) {
     /* These lines are important, also the '()' more important */
     (*word_len)++;
@@ -30,39 +45,55 @@ void insert_char(char** word, int* word_len, char ch) {
     (*word)[*word_len - 1] = ch;
 }
 
-// Function to check if a character is whitespace
+/// @brief Function to check if a character is whitespace
+/// @param ch the character
+/// @return boolean
 int is_whitespace(char ch) {
     return (ch == ' ');
 }
 
-// Function to trim leading whitespace characters
+/// @brief Function to trim leading whitespace characters
+/// @param text pointer to char
+/// @param character pointer to int
 void trim_whitespace(char* text, int* character) {
     while (is_whitespace(text[*character])) {
         (*character)++;
     }
 }
 
-// Function to check if a character is a valid text character
+/// @brief Function to check if a character is a valid text character
+/// @param ch the character
+/// @return boolean
 int is_text(char ch) {
     return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
 
-// Function to check if a character is a sentence terminator (period)
+/// @brief Function to check if a character is a sentence terminator (period)
+/// @param ch the character
+/// @return boolean
 int is_sentence_terminator(char ch) {
     return (ch == '.');
 }
 
-// Function to check if a character is a paragraph terminator (newline or null terminator)
+/// @brief Function to check if a character is a paragraph terminator (newline or null terminator)
+/// @param ch the character
+/// @return boolean
 int is_paragraph_terminator(char ch) {
     return ((ch == '\n') || (ch == '\0'));
 }
 
-// Function to get the next character in the text and increment the index
+/// @brief Function to get the next character in the text and increment the index
+/// @param text pointer to char
+/// @param character pointer to int
+/// @return **char** - the character
 char next_character(char* text, int* character) {
     return (text[(*character)++]);
 }
 
-// Function to parse the next word from the text
+/// @brief Function to parse the next word from the text
+/// @param text pointer to char
+/// @param character pointer to int
+/// @return **pointer to char** - the word
 char* next_word(char* text, int* character) {
     char* word = malloc(DEFAULT_LEN * sizeof(char));    // Allocate initial memory for the word
     int word_size = 0;                                  // Initialize word size
@@ -77,7 +108,10 @@ char* next_word(char* text, int* character) {
     return word;
 }
 
-// Function to parse the next sentence from the text
+/// @brief Function to parse the next sentence from the text
+/// @param text pointer to char
+/// @param character pointer to int
+/// @return **pointer to pointer to char** - the sentence
 char** next_sentence(char* text, int* character) {
     char** sentence = malloc(DEFAULT_LEN * sizeof(char*));                  // Allocate initial memory for the sentence
     int sentence_len = 0;                                                   // Initialize sentence length
@@ -96,7 +130,10 @@ char** next_sentence(char* text, int* character) {
     return sentence;
 }
 
-// Function to parse the next paragraph from the text
+/// @brief Function to parse the next paragraph from the text
+/// @param text pointer to char
+/// @param character pointer to int
+/// @return **pointer to pointer to pointer to char** - the paragraph
 char*** next_paragraph(char* text, int* character) {
     char*** paragraph = malloc(DEFAULT_LEN * sizeof(char**));                 // Allocate initial memory for the paragraph
     int paragraph_len = 0;                                                    // Initialize paragraph length
@@ -113,7 +150,9 @@ char*** next_paragraph(char* text, int* character) {
     return paragraph;
 }
 
-// Function to parse the entire document from the text
+/// @brief Function to parse the entire document from the text
+/// @param text pointer to char
+/// @return **pointer to pointer to pointer to pointer to char** - the document
 char**** get_document(char* text) {
     char**** document = malloc(DEFAULT_LEN * sizeof(char***));          // Allocate initial memory for the document
     int character = 0;                                                  // Initialize character index
