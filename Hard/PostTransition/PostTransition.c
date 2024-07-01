@@ -31,11 +31,11 @@ struct town
 typedef struct town town;
 
 void print_all_packages(town t) {
-
+	
 }
 
 void send_all_acceptable_packages(town* source, int source_office_index, town* target, int target_office_index) {
-
+	
 }
 
 town town_with_most_packages(town* towns, int towns_count) {
