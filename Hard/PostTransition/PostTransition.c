@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_STRING_LENGTH 6
 
@@ -31,19 +32,19 @@ struct town
 typedef struct town town;
 
 /// @brief Function to print all packages in a given town
-/// @param t the town
+/// @param t The Town
 void print_all_packages(town t) {
-	// print the town name
+	// Print the town name
     printf("%s:\n", t.name);
 
-	// loop on all available offices
+	// Loop on all available offices
     for (int office = 0; office < t.offices_count; office++) {
-		// print the office number
+		// Print the office number
         printf("\t%d:\n", office);
 
-		// loop on all available packages
+		// Loop on all available packages
         for (int package = 0; package < t.offices[office].packages_count; package++) {
-			// print the id of the package
+			// Print the id of the package
             printf("\t\t%s\n", t.offices[office].packages[package].id);
         }
     }
@@ -57,8 +58,22 @@ town town_with_most_packages(town* towns, int towns_count) {
 	
 }
 
+/// @brief Function to find a town by name
+/// @param towns Array of towns
+/// @param towns_count Numbre of towns
+/// @param name The name string to search on
+/// @return Town if available or null if not
 town* find_town(town* towns, int towns_count, char* name) {
-	
+	// Loop on all towns
+    while (towns_count--) {
+		// Search on the town by comparing its name with used name to search
+        if (!strcmp((towns->name), name)) {
+            return towns;
+        }
+        towns++;
+    }
+	// No town found
+    return NULL;
 }
 
 int main()
