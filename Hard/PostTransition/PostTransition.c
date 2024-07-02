@@ -30,8 +30,21 @@ struct town
 
 typedef struct town town;
 
+/// @brief Function to print all packages in a given town
+/// @param t the town
 void print_all_packages(town t) {
-	
+	// print the town name
+    printf("%s:\n", t.name);
+
+	// loop on all available offices
+    for (int office = 0; office < t.offices_count; office++) {
+        printf("\t%d:\n", office);
+
+		// loop on all available packages
+        for (int package = 0; package < t.offices[office].packages_count; package++) {
+            printf("\t\t%s\n", t.offices[office].packages[package].id);
+        }
+    }
 }
 
 void send_all_acceptable_packages(town* source, int source_office_index, town* target, int target_office_index) {
