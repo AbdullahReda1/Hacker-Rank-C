@@ -38,10 +38,12 @@ void print_all_packages(town t) {
 
 	// loop on all available offices
     for (int office = 0; office < t.offices_count; office++) {
+		// print the office number
         printf("\t%d:\n", office);
 
 		// loop on all available packages
         for (int package = 0; package < t.offices[office].packages_count; package++) {
+			// print the id of the package
             printf("\t\t%s\n", t.offices[office].packages[package].id);
         }
     }
