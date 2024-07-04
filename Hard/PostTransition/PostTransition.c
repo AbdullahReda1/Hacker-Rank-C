@@ -50,23 +50,45 @@ void print_all_packages(town t) {
     }
 }
 
+/// @brief Function to send all acceptable packages from a source post office to a target post office
+/// @param source town source
+/// @param source_office_index twon source index
+/// @param target town target
+/// @param target_office_index twon target index
 void send_all_acceptable_packages(town* source, int source_office_index, town* target, int target_office_index) {
+	// Pointers 'src' and 'tgt' are initialized to point to the source and target post offices respectively
 	post_office* src = (source->offices) + source_office_index;
 	post_office* tgt = (target->offices) + target_office_index;
 
+	// An array 'temp_package' is created to temporarily store packages that meet the weight criteria
 	package temp_package[src->packages_count];
-	int package_size = 0;
+	// 'tem_package_size' is used to keep track of the number of packages in 'temp_package'
+	int tem_package_size = 0;
 
+	// Iterate over all packages in the source post office
 	for (int outer_pkg_counter = 0; outer_pkg_counter < src->packages_count; /*Conditional increament*/) {
+		// Filtering Packages: If a package's weight falls within the acceptable range of the target post office
 		if ((((src->packages[outer_pkg_counter]).weight) >= (tgt->min_weight)) && (((src->packages[outer_pkg_counter]).weight) <= (tgt->max_weight))) {
-			temp_package[package_size++] = (src->packages[outer_pkg_counter]);
+			// Moving Packages: Adding to 'temp_package'
+			temp_package[tem_package_size++] = (src->packages[outer_pkg_counter]);
+			// Removing from the source post office by shifting the remaining packages in the array
 			for (int inner_pkg_counter = outer_pkg_counter; inner_pkg_counter < ((src->packages_count) - 1); inner_pkg_counter++) {
 				src->packages[inner_pkg_counter] = src->packages[inner_pkg_counter + 1];
 			}
+			// Decreament source packages count after removing them
 			(src->packages_count)--;
 		} else {
+			// The Weight NOT falls within the acceptable range of the target post office
 			outer_pkg_counter++;
 		}
+	}
+
+	// The target post office's package array is reallocated to accommodate the new packages
+	tgt->packages = realloc((tgt->packages), ((tgt->packages_count) + tem_package_size) * sizeof(package));
+
+	// The packages stored in 'temp_package' are added to the target post office's package array
+	for (int tgt_counter = 0; tgt_counter < tem_package_size; tgt_counter++) {
+		tgt->packages[(tgt->packages_count)++] = temp_package[tgt_counter];
 	}
 }
 
