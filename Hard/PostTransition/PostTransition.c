@@ -51,7 +51,23 @@ void print_all_packages(town t) {
 }
 
 void send_all_acceptable_packages(town* source, int source_office_index, town* target, int target_office_index) {
-	
+	post_office* src = (source->offices) + source_office_index;
+	post_office* tgt = (target->offices) + target_office_index;
+
+	package temp_package[src->packages_count];
+	int package_size = 0;
+
+	for (int outer_pkg_counter = 0; outer_pkg_counter < src->packages_count; /*Conditional increament*/) {
+		if ((((src->packages[outer_pkg_counter]).weight) >= (tgt->min_weight)) && (((src->packages[outer_pkg_counter]).weight) <= (tgt->max_weight))) {
+			temp_package[package_size++] = (src->packages[outer_pkg_counter]);
+			for (int inner_pkg_counter = outer_pkg_counter; inner_pkg_counter < ((src->packages_count) - 1); inner_pkg_counter++) {
+				src->packages[inner_pkg_counter] = src->packages[inner_pkg_counter + 1];
+			}
+			(src->packages_count)--;
+		} else {
+			outer_pkg_counter++;
+		}
+	}
 }
 
 town town_with_most_packages(town* towns, int towns_count) {
