@@ -92,8 +92,45 @@ void send_all_acceptable_packages(town* source, int source_office_index, town* t
 	}
 }
 
+/// @brief Function to find the town with the most number of packages
+/// @param towns Array of twons
+/// @param towns_count Number of twons
+/// @return twon struct
 town town_with_most_packages(town* towns, int towns_count) {
-	
+	// The function initializes 'max_town' to the first town in the array and 'max_packages' to 0
+	town max_twon = *towns;
+	int max_packages = 0;
+
+	// The Loop calculates the total number of packages in the first town by iterating through its post offices
+	for (int office_counter = 0; office_counter < (towns->offices_count); office_counter++) {
+		max_packages += towns->offices[office_counter].packages_count;
+	}
+
+	// Then moves to the next town and decrements 'towns_count'
+	towns++;
+	towns_count--;
+
+	// For each remaining town, the Loop calculates the total number of packages
+	while (towns_count--) {
+		int current_packages = 0;
+
+		// The Loop calculates the total number of packages in the currnt town by iterating through its current post offices
+		for (int current_office_counter = 0; current_office_counter < (towns->offices_count); current_office_counter++) {
+			current_packages += towns->offices[current_office_counter].packages_count;
+		}
+
+		// If the current town has more packages than the previous maximum, the function updates 'max_packages' and 'max_town'
+		if (current_packages > max_packages) {
+			max_packages = current_packages;
+			max_twon = *towns;
+		}
+		
+		// Moving to the next town in the array
+		towns++;
+	}
+
+	// After iterating through all the towns, the function returns the town with the most packages
+	return max_twon;
 }
 
 /// @brief Function to find a town by name
