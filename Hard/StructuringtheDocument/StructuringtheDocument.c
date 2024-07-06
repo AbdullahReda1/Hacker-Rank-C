@@ -16,7 +16,7 @@ struct sentence {
 };
 
 struct paragraph {
-    struct sentence* data  ;
+    struct sentence* data;
     int sentence_count;         //denotes number of sentences in a paragraph
 };
 
@@ -29,16 +29,31 @@ struct document get_document(char* text) {
     
 }
 
+/// @brief Return the k-th word in the m-th sentence of the n-th paragraph
+/// @param document the document
+/// @param k the words
+/// @param m the sentences
+/// @param n the paragraphs
+/// @return word struct
 struct word kth_word_in_mth_sentence_of_nth_paragraph(struct document Doc, int k, int m, int n) {
-    
+    return Doc.data[n - 1].data[m - 1].data[k - 1];
 }
 
+/// @brief Return the k-th sentence in the m-th paragraph
+/// @param document the document
+/// @param k the sentences
+/// @param m the paragraphs
+/// @return sentence struct
 struct sentence kth_sentence_in_mth_paragraph(struct document Doc, int k, int m) { 
-    
+    return Doc.data[m - 1].data[k - 1];
 }
 
+/// @brief Return the k-th paragraph
+/// @param document the document
+/// @param k the paragraphs
+/// @return paragraph struct
 struct paragraph kth_paragraph(struct document Doc, int k) {
-    
+    return Doc.data[k - 1];
 }
 
 void print_word(struct word w) {
