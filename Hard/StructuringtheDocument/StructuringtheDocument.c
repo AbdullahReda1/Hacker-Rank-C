@@ -12,17 +12,17 @@ struct word {
 
 struct sentence {
     struct word* data;
-    int word_count;             //denotes number of words in a sentence
+    int    word_count;             //denotes number of words in a sentence
 };
 
 struct paragraph {
     struct sentence* data;
-    int sentence_count;         //denotes number of sentences in a paragraph
+    int    sentence_count;         //denotes number of sentences in a paragraph
 };
 
 struct document {
     struct paragraph* data;
-    int paragraph_count;        //denotes number of paragraphs in a document
+    int    paragraph_count;        //denotes number of paragraphs in a document
 };
 
 struct document get_document(char* text) {
